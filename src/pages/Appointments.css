@@ -1,0 +1,98 @@
+.appointments-container {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .appointments-title {
+    text-align: center;
+    color: #007bff;
+  }
+  
+  .section-title {
+    margin-top: 30px;
+    margin-bottom: 10px;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .card-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .card {
+    flex: 1 1 calc(50% - 20px);
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    cursor: pointer;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-selected {
+    background-color: #f0f8ff;
+    border-color: #007bff;
+  }
+  
+  .slot-list {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+  }
+  
+  .slot-button {
+    padding: 10px 15px;
+    border: 1px solid #007bff;
+    background-color: #fff;
+    color: #007bff;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+  
+  .slot-button:hover,
+  .slot-selected {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .confirm-button {
+    display: block;
+    margin: 30px auto 0;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .confirm-button:hover {
+    background-color: #218838;
+  }
+  .appointments-list {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  
+  .appointments-list .card {
+    flex: 1 1 calc(50% - 20px);
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
