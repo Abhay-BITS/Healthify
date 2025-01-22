@@ -51,56 +51,69 @@ export default function Dashboard() {
     };
 
     const fetchAirQuality = async () => {
-      const lat = 40.7128; // New York City latitude
-      const lon = -74.0060; // New York City longitude
-      const apiKey = 'fc78c8ce962e4b66843cfb238ce7b500';
-    
-      try {
-        const response = await fetch(
-          `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
-        );
-        if (!response.ok) throw new Error('Failed to fetch air quality data');
-        const data = await response.json();
-
-        const aqi = data.list[0].main.aqi; // Air Quality Index
-        let category = '';
-        let tips = [];
-
-        switch (aqi) {
-          case 1:
-            category = 'Good';
-            tips = ['Enjoy outdoor activities!', 'Try deep breathing exercises for relaxation.'];
-            break;
-          case 2:
-            category = 'Fair';
-            tips = ['Consider reducing outdoor activities if you have sensitivities.', 'Use an air purifier indoors.'];
-            break;
-          case 3:
-            category = 'Moderate';
-            tips = ['Limit prolonged outdoor exertion.', 'Monitor symptoms if sensitive.'];
-            break;
-          case 4:
-            category = 'Poor';
-            tips = ['Avoid outdoor activities.', 'Wear a mask if going outside.', 'Use an air purifier indoors.'];
-            break;
-          case 5:
-            category = 'Very Poor';
-            tips = ['Stay indoors.', 'Avoid physical activity.', 'Keep windows and doors closed.'];
-            break;
-          default:
-            category = 'Unknown';
-            tips = ['Air quality data is unavailable.'];
-        }
-
-        setAirQuality({
-          location: 'New York City', // You can enhance this by integrating a geocoding API for dynamic city names
-          aqi,
-          category,
-          tips,
-        });
-      } catch (error) {
-        console.error('Error fetching air quality data:', error);
+      // Get the user's current location using geolocation API
+      if (!navigator.geolocation) {
+        console.error('Geolocation is not supported by this browser.');
+        return;
       }
+
+      navigator.geolocation.getCurrentPosition(
+        async (position) => {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+          const apiKey = 'fc78c8ce962e4b66843cfb238ce7b500';
+
+          try {
+            const response = await fetch(
+              `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
+            );
+            if (!response.ok) throw new Error('Failed to fetch air quality data');
+            const data = await response.json();
+
+            const aqi = data.list[0].main.aqi; // Air Quality Index
+            let category = '';
+            let tips = [];
+
+            switch (aqi) {
+              case 1:
+                category = 'Good';
+                tips = ['Enjoy outdoor activities!', 'Try deep breathing exercises for relaxation.'];
+                break;
+              case 2:
+                category = 'Fair';
+                tips = ['Consider reducing outdoor activities if you have sensitivities.', 'Use an air purifier indoors.'];
+                break;
+              case 3:
+                category = 'Moderate';
+                tips = ['Limit prolonged outdoor exertion.', 'Monitor symptoms if sensitive.'];
+                break;
+              case 4:
+                category = 'Poor';
+                tips = ['Avoid outdoor activities.', 'Wear a mask if going outside.', 'Use an air purifier indoors.'];
+                break;
+              case 5:
+                category = 'Very Poor';
+                tips = ['Stay indoors.', 'Avoid physical activity.', 'Keep windows and doors closed.'];
+                break;
+              default:
+                category = 'Unknown';
+                tips = ['Air quality data is unavailable.'];
+            }
+
+            setAirQuality({
+              location: `Lat: ${lat.toFixed(2)}, Lon: ${lon.toFixed(2)}`, // Displaying coordinates
+              aqi,
+              category,
+              tips,
+            });
+          } catch (error) {
+            console.error('Error fetching air quality data:', error);
+          }
+        },
+        (error) => {
+          console.error('Error getting geolocation:', error);
+        }
+      );
     };
 
     if (currentUser) {
