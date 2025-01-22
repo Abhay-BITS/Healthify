@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "src/services/firebase.ts"; // Import Firebase configuration
+import { db } from 'src/services/firebase';  // Ensure the correct path // Import Firebase configuration
 import {
   collection,
   addDoc,
