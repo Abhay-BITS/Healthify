@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { MessageSquare, ThumbsUp, Trash } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 import Markdown from "react-markdown";
-import { db } from 'src/services/firebase';  // Ensure the correct path
+import { db } from '../services/firebase'  // Ensure the correct path
 import { collection, addDoc, updateDoc, doc, deleteDoc, onSnapshot } from "firebase/firestore";
 
 interface Comment {
