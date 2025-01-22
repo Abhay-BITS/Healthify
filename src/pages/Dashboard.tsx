@@ -57,7 +57,7 @@ export default function Dashboard() {
     
       try {
         const response = await fetch(
-          `http://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
+          `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`
         );
         if (!response.ok) throw new Error('Failed to fetch air quality data');
         const data = await response.json();
